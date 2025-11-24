@@ -1,9 +1,6 @@
 import { useState, useEffect } from 'react';
 import type { LocationDetails } from '../types';
 
-
-
-
 type Location = {
   id: string;
   name: string;

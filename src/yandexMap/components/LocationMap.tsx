@@ -1,6 +1,6 @@
 import React from "react";
 import { YMaps, Map, Placemark } from "@pbe/react-yandex-maps";
-import { useState } from "react";
+import { useState, useEffect } from "react"; // Added useEffect
 import axios from "axios";
 import type { LocationDetails } from "../types";
 
@@ -29,6 +29,15 @@ const LocationMap: React.FC<LocationMapProps> = ({
 }) => {
   const [searchValue, setSearchValue] = useState("");
   const [mapInstance, setMapInstance] = useState<any>(null);
+  const [mapCenter, setMapCenter] = useState<[number, number]>(center); // Added mapCenter state
+
+  // Update map center when selectedLocation changes
+  useEffect(() => {
+    if (selectedLocation && mapInstance) {
+      setMapCenter([selectedLocation.lat, selectedLocation.lng]);
+      mapInstance.setCenter([selectedLocation.lat, selectedLocation.lng], 15);
+    }
+  }, [selectedLocation, mapInstance]);
 
   const handleMapClick = (e: any) => {
     const coords = e.get('coords');
@@ -111,6 +120,7 @@ const LocationMap: React.FC<LocationMapProps> = ({
         
         // Center map on the found location
         if (mapInstance) {
+          setMapCenter([lat, lon]);
           mapInstance.setCenter([lat, lon], 15);
         }
       } else {
@@ -146,8 +156,8 @@ const LocationMap: React.FC<LocationMapProps> = ({
         <YMaps query={{ apikey: 'your-api-key' }}>
           <Map
             state={{
-              center: center,
-              zoom: 13,
+              center: mapCenter, // Use mapCenter instead of center prop
+              zoom: 15, // Increased zoom for better focus
               controls: ['zoomControl', 'fullscreenControl']
             }}
             width="100%"
