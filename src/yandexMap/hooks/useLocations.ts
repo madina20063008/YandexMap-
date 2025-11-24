@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import type { LocationDetails } from '../../../types/location';
+import type { LocationDetails } from '../types';
 
 
 
