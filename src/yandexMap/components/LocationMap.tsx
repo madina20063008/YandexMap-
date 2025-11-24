@@ -1,5 +1,5 @@
 import React from "react";
-import { YMaps, Map, Placemark } from "react-yandex-maps";
+import { YMaps, Map, Placemark } from "@pbe/react-yandex-maps";
 import { useState } from "react";
 import axios from "axios";
 import type { LocationDetails } from "../types";
@@ -122,11 +122,6 @@ const LocationMap: React.FC<LocationMapProps> = ({
     }
   };
 
-  // Handle map instance when it's ready
-  const handleMapLoad = (ymaps: any) => {
-    // Map instance is available through the YMaps context
-  };
-
   return (
     <div className="space-y-4 relative">
       <div className="relative">
@@ -148,7 +143,7 @@ const LocationMap: React.FC<LocationMapProps> = ({
 
       {/* Map Container */}
       <div className="h-64 rounded-md overflow-hidden relative border border-gray-200">
-        <YMaps query={{ apikey: 'your-api-key' }} onLoad={handleMapLoad}>
+        <YMaps query={{ apikey: 'your-api-key' }}>
           <Map
             state={{
               center: center,

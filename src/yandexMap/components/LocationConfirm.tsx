@@ -1,5 +1,4 @@
-import React from 'react';
-import { YMaps, Map, Placemark } from 'react-yandex-maps';
+import { YMaps, Map, Placemark } from '@pbe/react-yandex-maps';
 import { useTranslation } from 'react-i18next';
 
 interface LocationConfirmProps {
